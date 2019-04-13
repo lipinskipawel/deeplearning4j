@@ -2564,9 +2564,6 @@ public abstract class BaseNDArray implements INDArray, Iterable {
      */
     @Override
     public long slices() {
-        if (isRowVector())
-            return length();
-
         return size(0);
     }
 
