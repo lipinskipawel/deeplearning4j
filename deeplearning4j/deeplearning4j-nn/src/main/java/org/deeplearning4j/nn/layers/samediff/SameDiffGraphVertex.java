@@ -33,6 +33,7 @@ import org.deeplearning4j.nn.workspace.LayerWorkspaceMgr;
 import org.nd4j.autodiff.samediff.SDVariable;
 import org.nd4j.autodiff.samediff.SameDiff;
 import org.nd4j.base.Preconditions;
+import org.nd4j.linalg.api.buffer.DataType;
 import org.nd4j.linalg.api.memory.MemoryWorkspace;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.ops.impl.layers.ExternalErrorsFunction;
@@ -65,8 +66,8 @@ public class SameDiffGraphVertex extends BaseGraphVertex {
     protected Map<String,INDArray> gradTable;
 
     public SameDiffGraphVertex(SameDiffVertex config, ComputationGraph graph, String name, int vertexIndex,
-                                  INDArray paramsView, boolean initParams) {
-        super(graph, name, vertexIndex, null, null);
+                                  INDArray paramsView, boolean initParams, DataType dataType) {
+        super(graph, name, vertexIndex, null, null, dataType);
         this.config = config;
         SDVertexParams vp = config.getVertexParams();
         paramTable = SameDiffParamInitializer.getInstance().subsetAndReshape(vp.getParameterKeys(),
