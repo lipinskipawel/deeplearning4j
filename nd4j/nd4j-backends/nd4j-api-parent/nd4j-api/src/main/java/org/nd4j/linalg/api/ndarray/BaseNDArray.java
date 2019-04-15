@@ -4950,6 +4950,14 @@ public abstract class BaseNDArray implements INDArray, Iterable {
         return get(NDArrayIndex.all(), NDArrayIndex.point(c));
     }
 
+    @Override
+    public INDArray getColumn(long c, boolean keepDim) {
+        INDArray col = getColumn(c);
+        if(!keepDim)
+            return col;
+        return col.reshape(1, col.length());
+    }
+
 
     /**
      * Get whole rows from the passed indices.
@@ -5126,6 +5134,14 @@ public abstract class BaseNDArray implements INDArray, Iterable {
         }
 
         return result;
+    }
+
+    @Override
+    public INDArray getRow(long r, boolean keepDim) {
+        INDArray row = getRow(r);
+        if(!keepDim)
+            return row;
+        return row.reshape(1, row.length());
     }
 
 
