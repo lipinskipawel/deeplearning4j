@@ -41,7 +41,6 @@ public class SameDiffLayer extends AbstractLayer<AbstractSameDiffLayer> {
 
     public static final String INPUT_KEY = "input";
 
-    protected DataType dataType;
     protected SameDiff sameDiff;
     protected SDVariable outputVar;
     protected ExternalErrorsFunction fn;
@@ -54,8 +53,7 @@ public class SameDiffLayer extends AbstractLayer<AbstractSameDiffLayer> {
 
 
     public SameDiffLayer(NeuralNetConfiguration conf, DataType dataType){
-        super(conf);
-        this.dataType = dataType;
+        super(conf, dataType);
     }
 
 
