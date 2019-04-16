@@ -2583,7 +2583,7 @@ public abstract class BaseNDArray implements INDArray, Iterable {
         int n = shape.length;
 
         if (offsets.length != n)
-            throw new IllegalArgumentException("Invalid offset " + Arrays.toString(offsets));
+            throw new IllegalArgumentException("Invalid offset: number of offsets must be equal to rank " + Arrays.toString(offsets) + ", rank = " + n);
         if (stride.length != n)
             throw new IllegalArgumentException("Invalid stride " + Arrays.toString(stride));
 
@@ -3079,6 +3079,8 @@ public abstract class BaseNDArray implements INDArray, Iterable {
     @Override
     public int stride(int dimension) {
         int rank = jvmShapeInfo.rank;
+        Preconditions.checkArgument(dimension < rank, "Cannot get stride for dimension %s from rank %s array: " +
+                "dimension indices must be in range -rank <= dimension < rank", dimension, rank);
         if (dimension < 0)
             return (int) stride()[dimension + rank];
         return (int) stride()[dimension];
@@ -4904,7 +4906,7 @@ public abstract class BaseNDArray implements INDArray, Iterable {
      */
     @Override
     public INDArray ravel() {
-        return reshape(1, length());
+        return reshape(length());
     }
 
     /**
